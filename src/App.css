@@ -1,0 +1,12 @@
+:root {
+  --mainDark: #343a40;
+  --mainGrey: rgb(229, 226, 223);
+  --mainLightGrey: rgb(172, 172, 172);
+  --mainWhite: #fff;
+  --mainBlue: #007bff;
+}
+
+ @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+
+
+/* @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"); */
