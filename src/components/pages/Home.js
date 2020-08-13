@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
-import Footer from '../layout/Footer'
 import Cite from '../layout/Cite'
 import styled from 'styled-components'
 import img from '../layout/book.jpg'
-import Navbar from '../layout/Navbar'
 import SearchBar from '../layout/SearchBar'
 import {Redirect} from 'react-router-dom'
 
 
-
-const SearchContext = React.createContext()
 
 
 class Home extends Component {
@@ -31,21 +27,28 @@ class Home extends Component {
 
   handleSubmit= (e) => {
     e.preventDefault()
-    let search = this.state.searchText;
-    search= search.replace(" ", "+").toLowerCase() +'&key='+process.env.REACT_APP_KEY;
-    let searchUrl = 'https://www.googleapis.com/books/v1/volumes?q='+search
+    if (this.state.searchText.trim()==='') {
+      alert('Please enter a valid search text')
+      this.setState({searchText: ''})
+    } else {
+    let search = this.state.searchText.replace(" ", "+").toLowerCase()
+    let url = 'https://www.googleapis.com/books/v1/volumes?q='+search +'&key='+process.env.REACT_APP_KEY
     this.setState({
       showCite: false,
       redirect: true,
-      userSearch: searchUrl})
+      userSearch: search,
+      searchUrl: url })
   }
+}
 
   render() {
     if (this.state.redirect) {
       return(
        <Redirect to={{
         pathname: '/results',
-        state: {userSearch: this.state.userSearch}
+        state: {userSearch: this.state.userSearch,
+                searchUrl: this.state.searchUrl
+                }
       }}/>)}
       return (
       <div>
@@ -61,7 +64,6 @@ class Home extends Component {
   }
 }
 
-const SearchConsumer = SearchContext.Consumer
 
 const Backgound = styled.div`
   min-height: 700px;
@@ -73,4 +75,4 @@ const Backgound = styled.div`
   background-size: cover;
 
 `
-export {Home, SearchContext, SearchConsumer , Backgound}
+export {Home, Backgound}

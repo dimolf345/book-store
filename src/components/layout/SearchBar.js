@@ -19,9 +19,7 @@ const SearchBar = (props) => {
           onClick={props.handleSubmit}
           className="btn btn-outline-warning">
         <i className="fas fa-search"/>
-        <Link to="/results">
         Search
-        </Link>
         </button>
       </form>
       </div>
